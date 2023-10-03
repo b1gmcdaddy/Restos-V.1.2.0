@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: cursive sans-serif;
+  }
+  body::before {
+    content: "";
+    background-image: url('/restosNEW/bg2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.91; 
+  }
+  body {
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.7); 
+  }
+  #main-header {
+    border-radius: 8px;
+  }
+  #infoIcon:hover{
+      color: rgb(57, 100, 143);
+  }
+  #trashIcon:hover{
+    color: rgb(143, 37, 37);
+  }
+  .btn i {
+    font-size: 20px; 
+  }
+  .data-entry{
+    font-size: 20px;
+    font-family: Tahoma;
+    letter-spacing: 1.5px;
+  }
+  #header-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 6px 2px 6px #030202;
+  }
+  .add-button{
+    background-color: #2C5282;
+    color: whitesmoke;
+  }
+  .add-button:hover {
+    opacity: 85%;
+    background-color: #2C5282;
+    color: whitesmoke;
+  }
+.container {
+    width: 50%;
+    margin-top: 7em;
+  }
+  @media screen and (max-width: 800px) {
+    .container {
+      width: 70%;
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .container {
+      width: 60%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .container {
+      width: 50%;
+      margin-top: 5em;
+    }
+  }
+  
