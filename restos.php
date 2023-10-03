@@ -81,12 +81,17 @@ include("config.php");
             echo '<div class="row mb-2">';
             echo '<div class="col-md-4 data-entry" style="text-align:center;">' . $resto . '</div>';
             echo '<div class="col-md-4" style="text-align:center;"></div>';
-            echo '<div class="col-md-4" style="text-align:center;"><a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" id="infoIcon"></i></a>
-            <a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" id="trashIcon"></i></a></div>';
+            echo '<div class="col-md-4" style="text-align:center;">
+                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" id="infoIcon"></i></a>
+                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#editModal' . $restoId . '"><i class="fas fa-edit" id="editIcon"></i></a>
+                <a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" id="trashIcon"></i></a>
+            </div>';
+            
             echo '</div>';
 
             // Modal for displaying restaurant description
             echo '<div class="modal fade" id="descriptionModal' . $restoId . '" tabindex="-1" aria-labelledby="descriptionModalLabel' . $restoId . '" aria-hidden="true">';
+            // ... (existing code for description modal)
             echo '<div class="modal-dialog">';
             echo '<div class="modal-content">';
             echo '<div class="modal-header">';
@@ -103,12 +108,47 @@ include("config.php");
             echo '</div>';
             echo '</div>';
             echo '</div>';
+
+            // Modal for editing restaurant information
+            echo '<div class="modal fade" id="editModal' . $restoId . '" tabindex="-1" aria-labelledby="editModalLabel' . $restoId . '" aria-hidden="true">';
+            echo '<div class="modal-dialog">';
+            echo '<div class="modal-content">';
+            echo '<div class="modal-header">';
+            echo '<h5 class="modal-title" id="editModalLabel' . $restoId . '">Edit Restaurant Information</h5>';
+            echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
+            echo '</div>';
+            echo '<div class="modal-body">';
+            // Add a form here to edit the restaurant information
+            echo '<form action="edit_resto.php" method="post">';
+            echo '<div class="mb-3">';
+            echo '<label for="editRestoName' . $restoId . '" class="form-label">Restaurant Name</label>';
+            echo '<input type="text" class="form-control" id="editRestoName' . $restoId . '" name="editRestoName" value="' . $resto . '">';
+            echo '</div>';
+            echo '<div class="mb-3">';
+            echo '<label for="editMealType' . $restoId . '" class="form-label">Meal Type</label>';
+            echo '<input type="text" class="form-control" id="editMealType' . $restoId . '" name="editMealType" value="' . $type . '">';
+            echo '</div>';
+            echo '<div class="mb-3">';
+            echo '<label for="editRestoDesc' . $restoId . '" class="form-label">Restaurant Description</label>';
+            echo '<textarea class="form-control" id="editRestoDesc' . $restoId . '" name="editRestoDesc" rows="4">' . $restoDesc . '</textarea>';
+            echo '</div>';
+            echo '<input type="hidden" name="restoId" value="' . $restoId . '">';
+            echo '<button type="submit" class="btn btn-primary">Save Changes</button>';
+            echo '</form>';
+            echo '</div>';
+            echo '<div class="modal-footer">';
+            echo '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
     } else {
         echo '<p>No data available.</p>';
     }
     ?>
             </div>
+
 
         </div>
     </div>
