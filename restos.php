@@ -66,7 +66,7 @@ include("config.php");
 
 
             </div>
-            <div class="listofRestos mt-3 p-3" id="listContainer" style="max-height: 300px; overflow-y: auto;">
+            <div class="listofRestos mt-3 p-3" id="listContainer" style="max-height: 400px; overflow-y: auto;">
                 <?php
     $sql = "SELECT resto_name, meal_type, resto_id, resto_desc FROM places";
     $result = $conn->query($sql);
@@ -78,8 +78,8 @@ include("config.php");
             $restoId = $row['resto_id'];
             $restoDesc = $row['resto_desc'];
 
-            echo '<div class="row mb-2">';
-            echo '<div class="col-md-4 data-entry" style="text-align:center;">' . $resto . '</div>';
+            echo '<div class="row mb-2" style="border:1px solid; border-radius:20px; background-color:#E1F0F5; padding: 13px; width: 90%; margin:auto; box-shadow: 6px 6px;">';
+            echo '<div class="col-md-4 data-entry" style="text-align:center; margin-top:2px;">' . $resto . '</div>';
             echo '<div class="col-md-4" style="text-align:center;"></div>';
             echo '<div class="col-md-4" style="text-align:center;">
                 <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" id="infoIcon"></i></a>
@@ -91,7 +91,6 @@ include("config.php");
 
             // Modal for displaying restaurant description
             echo '<div class="modal fade" id="descriptionModal' . $restoId . '" tabindex="-1" aria-labelledby="descriptionModalLabel' . $restoId . '" aria-hidden="true">';
-            // ... (existing code for description modal)
             echo '<div class="modal-dialog">';
             echo '<div class="modal-content">';
             echo '<div class="modal-header">';
@@ -118,7 +117,6 @@ include("config.php");
             echo '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
             echo '</div>';
             echo '<div class="modal-body">';
-            // Add a form here to edit the restaurant information
             echo '<form action="edit_resto.php" method="post">';
             echo '<div class="mb-3">';
             echo '<label for="editRestoName' . $restoId . '" class="form-label">Restaurant Name</label>';
