@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
     $sql = "DELETE FROM places WHERE resto_id = $restoId";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: restos.php");
+        header("Location: index.php");
         exit;
     } else {
         echo "Error deleting record: " . $conn->error;

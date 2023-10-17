@@ -20,7 +20,7 @@ if (isset($_POST['type']) && isset($_POST['resto']) || isset($_POST['notes'])) {
     $sql = "INSERT INTO places (meal_type, resto_name, resto_desc) VALUES ('$type', '$resto', '$notes')";
 
     if ($conn->query($sql) === TRUE) {
-      header("Location: restos.php");
+      header("Location: index.php");
       exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

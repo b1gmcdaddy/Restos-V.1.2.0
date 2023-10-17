@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: cursive sans-serif;
   }
   body::before {
     content: "";
@@ -25,18 +24,18 @@
     border-radius: 8px;
   }
   #infoIcon:hover{
-      color: rgb(57, 100, 143);
+    color: rgb(57, 100, 143);
   }
   #trashIcon:hover{
     color: rgb(143, 37, 37);
+    
   }
   .btn i {
     font-size: 20px; 
   }
   .data-entry{
     font-size: 20px;
-    font-family: Tahoma;
-    letter-spacing: 1.5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
   #header-title {
     font-size: 3rem;

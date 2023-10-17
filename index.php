@@ -19,7 +19,6 @@ include("config.php");
 </head>
 
 <body>
-
     <div class="container-lg mt-5">
         <header id="main-header" class="text-white p-4 mb-3" style="background-color: #2C5282; border: 2px solid">
             <div class="row">
@@ -63,10 +62,9 @@ include("config.php");
                         <button class="btn add-button" type="submit">ADD</button>
                     </div>
                 </form>
-
-
             </div>
-            <div class="listofRestos mt-3 p-3" id="listContainer" style="max-height: 400px; overflow-y: auto;">
+            <hr style="box-shadow: 0 5px #2C5282; border: solid black;" />
+            <div class="listofRestos mt-1.5 p-3" id="listContainer" style="height: 400px; overflow-y: auto;">
                 <?php
     $sql = "SELECT resto_name, meal_type, resto_id, resto_desc FROM places";
     $result = $conn->query($sql);
@@ -78,13 +76,15 @@ include("config.php");
             $restoId = $row['resto_id'];
             $restoDesc = $row['resto_desc'];
 
-            echo '<div class="row mb-2" style="border:1px solid; border-radius:20px; background-color:#E1F0F5; padding: 13px; width: 90%; margin:auto; box-shadow: 6px 6px;">';
+            //list of restos to be displayed
+            echo '<div class="row mb-2" style="padding: 13px; width: 90%; margin:auto; border-style: outset;
+            border-radius: 10px; box-shadow: 7px 5px 5px gray; background-color: whitesmoke;">';
             echo '<div class="col-md-4 data-entry" style="text-align:center; margin-top:2px;">' . $resto . '</div>';
             echo '<div class="col-md-4" style="text-align:center;"></div>';
             echo '<div class="col-md-4" style="text-align:center;">
-                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" id="infoIcon"></i></a>
-                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#editModal' . $restoId . '"><i class="fas fa-edit" id="editIcon"></i></a>
-                <a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" id="trashIcon"></i></a>
+                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" title="Additional Info" id="infoIcon"></i></a>
+                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#editModal' . $restoId . '"><i class="fas fa-edit" title="Edit Resto" id="editIcon"></i></a>
+                <a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" title="Delete Resto" id="trashIcon"></i></a>
             </div>';
             
             echo '</div>';
