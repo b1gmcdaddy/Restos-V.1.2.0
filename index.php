@@ -67,7 +67,7 @@ include("config.php");
             <hr style="box-shadow: 0 5px #2C5282; border: solid black;" />
             <div class="listofRestos mt-1.5 p-3" id="listContainer" style="height: 400px; overflow-y: auto;">
                 <?php
-    $sql = "SELECT resto_name, meal_type, resto_id, resto_desc FROM places";
+    $sql = "SELECT resto_name, meal_type, resto_id, resto_desc, is_Fave FROM places ORDER BY is_Fave DESC";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -80,15 +80,24 @@ include("config.php");
             //list of restos to be displayed
             echo '<div class="row mb-2" style="padding: 13px; width: 90%; margin:auto; border-style: outset;
             border-radius: 10px; box-shadow: 7px 5px 5px gray; background-color: whitesmoke;">';
-            echo '<div class="col-md-4 data-entry" style="text-align:center; margin-top:2px;">' . $resto . '</div>';
-            echo '<div class="col-md-4" style="text-align:center;"></div>';
-            echo '<div class="col-md-4" style="text-align:center;">
-                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" title="Additional Info" id="infoIcon"></i></a>
-                <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#editModal' . $restoId . '"><i class="fas fa-edit" title="Edit Resto" id="editIcon"></i></a>
-                <a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" title="Delete Resto" id="trashIcon"></i></a>
-            </div>';
-            
+            echo '<div class="col-md-4 data-entry" style="text-align:center;">';
+            echo $resto;
             echo '</div>';
+            echo '<div class="col-md-4 mt-1" style="text-align:center;">';
+            if ($row['is_Fave'] === 'fave') {
+            echo '<a href="#" class="favorite-btn" data-id="' . $restoId . '"><i class="fas fa-heart" title="Unfavorite"></i></a>';
+            } else {
+            echo '<a href="#" class="favorite-btn" data-id="' . $restoId . '"><i class="far fa-heart" title="Favorite"></i></a>';
+            }
+
+            echo '</div>';
+            echo '<div class="col-md-4" style="text-align:center">';
+            echo '<a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#descriptionModal' . $restoId . '"><i class="fas fa-info-circle" title="Additional Info" id="infoIcon"></i></a>';
+            echo '<a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#editModal' . $restoId . '"><i class="fas fa-edit" title="Edit Resto" id="editIcon"></i></a>';
+            echo '<a href="delete_resto.php?id=' . $restoId . '" class="btn"><i class="fas fa-trash" title="Delete Resto" id="trashIcon"></i></a>';
+            echo '</div>';
+            echo '</div>';
+
 
             // Modal for displaying restaurant description
             echo '<div class="modal fade" id="descriptionModal' . $restoId . '" tabindex="-1" aria-labelledby="descriptionModalLabel' . $restoId . '" aria-hidden="true">';
@@ -143,19 +152,43 @@ include("config.php");
             echo '</div>';
         }
     } else {
-        echo '<p>No data available.</p>';
+        echo '<p>No restos entered.</p>';
     }
     ?>
             </div>
-
-
         </div>
     </div>
 
-
+    <!-------- Bootstrap JS CDN -------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+    <!------- Vanilla JS for fave-ing a resto -------->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const favoriteButtons = document.querySelectorAll('.favorite-btn');
+
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                const restoId = button.getAttribute('data-id');
+                fetch('fave_resto.php', {
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            restoId: restoId
+                        }),
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        if (result === 'success') {
+                            button.innerHTML =
+                                '<i class="fas fa-heart" title="Unfavorite"></i>';
+                        }
+                    });
+            });
+        });
+    });
+    </script>
+
 </body>
 
 </html>
